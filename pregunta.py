@@ -48,16 +48,19 @@ def ingest_data():
             else: 
                 comienzo_dato= True
                 c4.append(auxC4)
-                auxC4= ""         
+                auxC4= ""
+    newc4= []
+    for c in c4:
+        if c[-1] == " ":
+            c= c[:-1] 
+        newc4.append(c)
+
     information= {
     'cluster':c1,
     'cantidad_de_palabras_clave' :c2,
     'porcentaje_de_palabras_clave':c3,
-    'principales_palabras_clave': c4
+    'principales_palabras_clave': newc4
     }
     df = pd.DataFrame(information)
     license_file.close()
     return df
-    
-df= ingest_data()
-print(df.principales_palabras_clave.to_list()[2])
